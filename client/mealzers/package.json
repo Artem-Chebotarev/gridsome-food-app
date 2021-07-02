@@ -1,0 +1,17 @@
+{
+  "name": "mealzers",
+  "private": true,
+  "scripts": {
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "build": "gridsome build"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "gridsome": "^0.7.0",
+    "vuetify": "^2.5.6"
+  },
+  "devDependencies": {
+    "webpack-node-externals": "^3.0.0"
+  }
+}
