@@ -19,10 +19,13 @@
       </v-carousel>
       <div class="separator"></div>
     </template>
+    <Products show="false" banner="Best Sellers" />
   </Layout>
 </template>
 
 <script>
+import Products from "@/components/Products.vue";
+
 export default {
   metaInfo: {
     title: "Mealzers",
@@ -38,5 +41,26 @@ export default {
       ],
     };
   },
+
+  components: {
+    Products,
+  },
 };
 </script>
+
+<page-query>
+query{
+  products: allProduct{
+    edges{
+      node{
+        id,
+        title,
+        description,
+        rating,
+        price,
+        image
+      }
+    }
+  }
+}
+</page-query>

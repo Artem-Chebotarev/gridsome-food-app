@@ -6,6 +6,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 const nodeExternals = require('webpack-node-externals')
+const axios = require("axios");
 
 module.exports = function (api) {
   api.chainWebpack((config, { isServer }) => {
@@ -18,7 +19,26 @@ module.exports = function (api) {
     }
   })
 
-  api.loadSource(store => {
-    // Use the Data store API here: https://gridsome.org/docs/data-store-api
+  api.loadSource(async (actions) => {
+    const { data } = await axios.get("http://localhost:1337/products");
+    const collection = actions.addCollection({
+      typeName: "Product",
+    })
+
+    for (const product of data) {
+      collection.addNode({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        rating: product.rating,
+        description: product.description,
+        image: product.image.formats.thumbnail.url,
+        instructions: product.instructions,
+      });
+    }
+  });
+  
+  api.createPages(({ createPage }) => {
+    // Use the Pages API here: https://gridsome.org/docs/pages-api/
   })
 }
