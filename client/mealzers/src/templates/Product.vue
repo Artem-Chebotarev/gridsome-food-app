@@ -19,7 +19,20 @@
           {{ this.$page.product.instructions }}
         </v-card-subtitle>
         <v-card-actions>
-          <v-btn rounded outlined color="orange" text> Add to cart </v-btn>
+          <v-btn
+            rounded
+            outlined
+            color="orange"
+            text
+            class="snipcart-add-item"
+            :data-item-id="this.$page.product.id"
+            :data-item-description="this.$page.product.description"
+            :data-item-image="`http://localhost:1337${this.$page.product.image}`"
+            :data-item-price="this.$page.product.price"
+            :data-item-name="this.$page.product.title"
+          >
+            Add to cart
+          </v-btn>
           <v-spacer></v-spacer>
           <v-rating
             :value="this.$page.product.rating"

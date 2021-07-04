@@ -1,6 +1,11 @@
 <!-- src/layouts/Default.vue -->
   <template>
   <v-app>
+    <div
+      hidden
+      id="snipcart"
+      data-api-key="ZTE1ZmM3MTQtMmJlZS00NzE5LTgwZDUtOTM2YTliNWU5Y2ZlNjM3NjEwMjIwMDA5MTU4MTAy"
+    ></div>
     <div>
       <v-app-bar
         absolute
@@ -28,6 +33,11 @@
             >Support</g-link
           >
         </v-btn>
+        <!-- <v-btn class="snipcart-checkout" icon>
+          <v-icon>mdi-cart</v-icon>
+          <span class="snipcart-total-items"></span>
+          <span class="snipcart-total-price"></span>
+        </v-btn> -->
         <v-text-field
           v-model="searchText"
           @click:clear="searchText = ''"
@@ -104,6 +114,7 @@ export default {
     return {
       drawer,
       group,
+      totalPrice: 0,
     };
   },
 
@@ -111,6 +122,16 @@ export default {
     group() {
       this.drawer = false;
     },
+  },
+
+  methods: {
+    getTotalPrice() {
+      return Snipcart.store.getState().cart.total;
+    },
+  },
+
+  mounted() {
+    this.totalPrice = this.getTotalPrice();
   },
 };
 </script>
